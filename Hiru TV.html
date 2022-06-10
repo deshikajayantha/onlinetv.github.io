@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sri Lanka Live TV Stream By Deshika Jayantha</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/all.min.js"></script>
+    <!--link to vedio player-->
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+</head>
+<body style="background-image: none;">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg mt-5 bg-dark" style="--bs-bg-opacity: .5;">
+                <div class="card-body">
+                    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+                    <video id="video" src="https://eu10b.serverse.com:1936/8012/8012/playlist.m3u8" controls width="100%" autoplay></video>
+                    <script>
+                        if(Hls.isSupported())
+                        {
+                            var video = document.getElementById('video');
+                            var hls = new Hls();
+                            hls.loadSource('https://eu10b.serverse.com:1936/8012/8012/playlist.m3u8');
+                            hls.attachMedia(video);
+                            hls.on(Hls.Events.MANIFEST_PARSED,function()
+                            {
+                                video.play();
+                            });
+                        }
+                        else if (video.canPlayType('application/vnd.apple.mpegurl'))
+                        {
+                            video.src = 'https://eu10b.serverse.com:1936/8012/8012/playlist.m3u8';
+                            video.addEventListener('canplay',function()
+                            {
+                                video.play();
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
